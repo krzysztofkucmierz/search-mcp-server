@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-search-server"
+version = "0.1.0"
+description = "A Model Context Protocol (MCP) search server"
+readme = "README.md"
+license = { text = "Apache 2.0" }
+authors = [
+    { name = "Krzysztof Kućmierz", email = "krzysztof.kucmierz@artificiuminformatica.pl" }
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.11.3",
+    "httpx",
+    "beautifulsoup4",
+    "lxml",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_search_server"]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/mcp-search-server"
+Repository = "https://github.com/yourusername/mcp-search-server"
+Issues = "https://github.com/yourusername/mcp-search-server/issues"
+
+[project.scripts]
+mcp-search-server = "mcp_search_server.mcp_server:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py313']
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "C90", "I", "N", "UP", "S", "B", "A", "C4", "EM", "ICN", "PIE", "PT", "Q", "RET", "SIM", "TID", "ARG", "PD", "PGH", "PL", "TRY", "NPY", "RUF"]
+ignore = ["S101", "PLR2004", "PLR0913"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "mypy>=1.17.1",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "ruff>=0.12.10",
+]
