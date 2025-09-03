@@ -3,7 +3,7 @@ MCP Search Server - Search and discover existing MCP servers from the official r
 
 This server provides search functionality for the comprehensive list of MCP servers
 available at https://github.com/modelcontextprotocol/servers. It helps users discover
-relevant MCP servers for their needs and provides detailed information about each
+relevant MCP servers for their needs and provides basic information about each
 server.
 """
 
@@ -19,7 +19,6 @@ from fastmcp import FastMCP
 # Create the FastMCP server instance
 mcp = FastMCP("MCP Search Server")
 
-# Module logger
 logger = logging.getLogger(__name__)
 
 
@@ -43,44 +42,6 @@ async def _find_section_header(readme_content: Tag, section_name: str) -> Tag | 
             ):
                 return heading
     return None
-
-
-def _extract_server_info(li: Tag, category_type: str) -> dict[str, Any] | None:
-    """Extract server information from a list item."""
-    link = li.find("a", href=True)
-    if not isinstance(link, Tag):
-        return None
-
-    href_val = link.get("href")
-    if not href_val:
-        return None
-
-    href = str(href_val)
-    name = link.get_text(strip=True)
-
-    # Extract description from the text after the link
-    # Format: "Name - Description"
-    li_text = li.get_text(strip=True)
-    description = ""
-    if " - " in li_text:
-        parts = li_text.split(" - ", 1)
-        if len(parts) > 1:
-            description = parts[1].strip()
-
-    if not description:
-        description = f"MCP server: {name}"
-
-    # Build full URL if relative
-    full_url = href
-    if href.startswith("/"):
-        full_url = f"https://github.com{href}"
-
-    return {
-        "name": name,
-        "description": description,
-        "url": full_url,
-        "category": f"{category_type} Server",
-    }
 
 
 def _get_section_bounds(
@@ -200,7 +161,6 @@ async def fetch_mcp_servers_from_github() -> list[dict[str, Any]]:
 
         except Exception:
             logger.exception("Error fetching servers from GitHub")
-            # Return fallback servers if scraping fails
             return []
         else:
             return servers  # Return all servers for comprehensive search
@@ -277,7 +237,8 @@ async def search_mcp_servers(query: str, category: str = "all") -> dict[str, Any
         query: Search query to find relevant MCP servers (searches name,
                description, and category)
         category: Filter by category (all, development, database,
-                  productivity, automation, cloud, security, etc.)    Returns:
+                  productivity, automation, cloud, security, etc.)
+    Returns:
         Search results with matching MCP servers and their details
     """
     servers_data = await get_servers_data()

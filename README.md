@@ -21,9 +21,6 @@ Install [uv](https://docs.astral.sh/uv/) (fast Python package manager):
 # macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Windows
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-
 # Or with pip
 pip install uv
 ```
@@ -40,30 +37,31 @@ uv sync
 
 ### Start the MCP Server
 
+Note: the server script `mcp_server.py` lives in the repo root — run it directly as shown below. If you install the package, the `mcp-search-server` entry point (configured in `pyproject.toml`) will also be available.
+
 ```bash
-# SSE mode (recommended)
+# SSE mode (recommended) — exposes an HTTP/SSE endpoint
 uv run python mcp_server.py --sse
 
 # Custom port and cache timeout
 uv run python mcp_server.py --sse --port 8001 --cache-timeout 3600
 
-# Stdio mode (for MCP clients)
+# Stdio mode (for MCP clients that spawn the process)
 uv run python mcp_server.py
 ```
 
+Small note: use `--sse` when you want other apps to connect over HTTP; omit it to run in stdio mode where the client must start the process.
+
 ### To add this MCP server to VSCode
 
-Create mcp.json file containing:
+If you run the server with `--sse`, point your client (or VSCode MCP extension) to the SSE URL (example: `http://127.0.0.1:8000/sse`). The following minimal JSON shows the URL form (only valid when using `--sse`):
 
 ```json
 {
-"servers": {
-    "Search MCP server": {
-        "url": "http://127.0.0.1:8000/sse",
-        "type": "http"
-    }
-},
-"inputs": []
+    "servers": {
+        "Search MCP server": { "url": "http://127.0.0.1:8000/sse", "type": "http" }
+    },
+    "inputs": []
 }
 ```
 
@@ -73,15 +71,10 @@ Create mcp.json file containing:
 - `--port PORT`: Port for SSE mode (default: 8000)
 - `--cache-timeout SECONDS`: Cache timeout in seconds (default: 21600 = 6 hours)
 
-### Available Tools
+### Tools & Resources
 
-- **`search_mcp_servers(query, category)`** - Search for MCP servers
-- **`get_mcp_server_categories()`** - List all available categories
-
-### Available Resources
-
-- **`mcp://servers/list`** - Formatted list of all MCP servers
-- **`mcp://servers/categories`** - Information about server categories
+- Tools: `search_mcp_servers(query, category)`, `get_mcp_server_categories()`
+- Resources: `mcp://servers/list`, `mcp://servers/categories`
 
 ## Development
 
