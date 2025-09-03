@@ -1,4 +1,4 @@
-# MCP Search Server
+# Search MCP Server
 
 A Model Context Protocol (MCP) server that enables searching and discovering existing MCP servers from the official GitHub repository.
 
@@ -7,9 +7,9 @@ A Model Context Protocol (MCP) server that enables searching and discovering exi
 
 ## Features
 
-- **🔍 Search MCP Servers**: Find relevant MCP servers by name, description, or category
-- **🌐 Dynamic Data**: Live scraping from <https://github.com/modelcontextprotocol/servers>
-- **⚡ Fast & Cached**: Configurable caching (default: 6 hours) for optimal performance
+- **Search MCP Servers**: Find relevant MCP servers by name, description, or category
+- **Dynamic Data**: Live scraping from <https://github.com/modelcontextprotocol/servers>
+- **Fast & Cached**: Configurable caching (default: 6 hours) for optimal performance
 
 ## Installation
 
@@ -28,8 +28,8 @@ pip install uv
 ### Setup Project
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/krzysztofkucmierz/search-mcp-server.git
+cd search-mcp-server
 uv sync
 ```
 

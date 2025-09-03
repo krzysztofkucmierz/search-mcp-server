@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-search-server"
+name = "search-mcp-server"
 version = "0.1.0"
 description = "A Model Context Protocol (MCP) search server"
 readme = "README.md"
@@ -30,12 +30,12 @@ dependencies = [
 packages = ["src/mcp_search_server"]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/mcp-search-server"
-Repository = "https://github.com/yourusername/mcp-search-server"
-Issues = "https://github.com/yourusername/mcp-search-server/issues"
+Homepage = "https://github.com/krzysztofkucmierz/search-mcp-server"
+Repository = "https://github.com/krzysztofkucmierz/search-mcp-server"
+Issues = "https://github.com/krzysztofkucmierz/search-mcp-server/issues"
 
 [project.scripts]
-mcp-search-server = "mcp_search_server.mcp_server:main"
+mcp-search-server = "mcp_server:main"
 
 [tool.black]
 line-length = 88
