@@ -27,7 +27,8 @@ dependencies = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/mcp_search_server"]
+packages = ["."]
+py-modules = ["mcp_server"]
 
 [project.urls]
 Homepage = "https://github.com/krzysztofkucmierz/search-mcp-server"
@@ -62,4 +63,5 @@ dev = [
     "pytest>=8.4.1",
     "pytest-asyncio>=1.1.0",
     "ruff>=0.12.10",
+    "twine>=6.1.0",
 ]
