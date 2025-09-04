@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "search-mcp-server"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Model Context Protocol (MCP) search server"
 readme = "README.md"
 license = { text = "Apache 2.0" }
@@ -12,7 +12,7 @@ authors = [
     { name = "Krzysztof Kućmierz", email = "krzysztof.kucmierz@artificiuminformatica.pl" }
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
@@ -36,7 +36,7 @@ Repository = "https://github.com/krzysztofkucmierz/search-mcp-server"
 Issues = "https://github.com/krzysztofkucmierz/search-mcp-server/issues"
 
 [project.scripts]
-mcp-search-server = "mcp_server:main"
+search-mcp-server = "mcp_server:main"
 
 [tool.black]
 line-length = 88
